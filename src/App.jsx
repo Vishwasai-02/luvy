@@ -16,7 +16,6 @@ import GlobalNotifications from './components/GlobalNotifications';
 import { CartProvider } from './context/CartContext';
 import { WishlistProvider } from './context/WishlistContext';
 
-import MobileBottomNav from './components/MobileBottomNav';
 
 function AppContent() {
   const location = useLocation();
@@ -39,7 +38,6 @@ function AppContent() {
         </Routes>
       </main>
       {!isAuthPage && <Footer />}
-      <MobileBottomNav />
     </div>
   );
 }
