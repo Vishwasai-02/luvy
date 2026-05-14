@@ -77,37 +77,41 @@ const Home = () => {
       <section className="py-section" style={{ backgroundColor: 'var(--bg-white)', overflow: 'hidden' }}>
         <div className="container">
           <h2 className="section-title">Best Sellers</h2>
-          <div className="best-sellers-carousel">
-            {bestSellers.map(product => (
-              <motion.div
-                layoutId={`product-card-${product.id}`}
-                key={product.id}
-                className="bs-card"
-                onClick={(e) => {
-                  e.preventDefault();
-                  setSelectedProduct(product);
-                  setFeedbackMessage('');
-                }}
-                whileHover={{ scale: 1.05 }}
-                transition={{ duration: 0.3, ease: 'easeInOut' }}
-              >
-                <motion.div className="bs-img-wrapper" layoutId={`product-image-container-${product.id}`}>
-                  <motion.img 
-                    src={product.image} 
-                    alt={product.name} 
-                    className="bs-img" 
-                    layoutId={`product-image-${product.id}`} 
-                    initial={{ scale: 1 }}
-                    whileHover={{ scale: 1.1 }}
-                    transition={{ duration: 0.4 }}
-                  />
-                  <span className="bs-badge">Best Seller</span>
-                </motion.div>
-                <div className="bs-info">
-                  <motion.h3 layoutId={`product-title-${product.id}`} className="bs-title">{product.name}</motion.h3>
-                  <motion.p layoutId={`product-price-${product.id}`} className="bs-price">₹{product.price.toFixed(2)}</motion.p>
-                </div>
-              </motion.div>
+          <div className="marquee-wrapper">
+            {[0, 1, 2, 3].map(copyIndex => (
+              <div key={copyIndex} className="marquee-content" aria-hidden={copyIndex !== 0}>
+                {bestSellers.map(product => (
+                  <motion.div
+                    layoutId={`product-card-${product.id}-${copyIndex}`}
+                    key={`${product.id}-${copyIndex}`}
+                    className="bs-card"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setSelectedProduct({ ...product, instanceId: copyIndex });
+                      setFeedbackMessage('');
+                    }}
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ duration: 0.3, ease: 'easeInOut' }}
+                  >
+                    <motion.div className="bs-img-wrapper" layoutId={`product-image-container-${product.id}-${copyIndex}`}>
+                      <motion.img 
+                        src={product.image} 
+                        alt={product.name} 
+                        className="bs-img" 
+                        layoutId={`product-image-${product.id}-${copyIndex}`} 
+                        initial={{ scale: 1 }}
+                        whileHover={{ scale: 1.1 }}
+                        transition={{ duration: 0.4 }}
+                      />
+                      <span className="bs-badge">Best Seller</span>
+                    </motion.div>
+                    <div className="bs-info">
+                      <motion.h3 layoutId={`product-title-${product.id}-${copyIndex}`} className="bs-title">{product.name}</motion.h3>
+                      <motion.p layoutId={`product-price-${product.id}-${copyIndex}`} className="bs-price">₹{product.price.toFixed(2)}</motion.p>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
             ))}
           </div>
         </div>
@@ -132,26 +136,26 @@ const Home = () => {
             />
             <div className="product-overlay-wrapper" onClick={() => setSelectedProduct(null)}>
               <motion.div
-                layoutId={`product-card-${selectedProduct.id}`}
+                layoutId={`product-card-${selectedProduct.id}-${selectedProduct.instanceId ?? 0}`}
                 className="product-detail-card"
                 onClick={(e) => e.stopPropagation()}
               >
                 <button className="close-btn" onClick={() => setSelectedProduct(null)}>✕</button>
                 
-                <motion.div className="detail-img-wrapper" layoutId={`product-image-container-${selectedProduct.id}`}>
+                <motion.div className="detail-img-wrapper" layoutId={`product-image-container-${selectedProduct.id}-${selectedProduct.instanceId ?? 0}`}>
                   <motion.img 
                     src={selectedProduct.image} 
                     alt={selectedProduct.name} 
                     className="detail-img"
-                    layoutId={`product-image-${selectedProduct.id}`}
+                    layoutId={`product-image-${selectedProduct.id}-${selectedProduct.instanceId ?? 0}`}
                   />
                 </motion.div>
                 
                 <div className="detail-info">
-                  <motion.h2 layoutId={`product-title-${selectedProduct.id}`} className="detail-title">
+                  <motion.h2 layoutId={`product-title-${selectedProduct.id}-${selectedProduct.instanceId ?? 0}`} className="detail-title">
                     {selectedProduct.name}
                   </motion.h2>
-                  <motion.p layoutId={`product-price-${selectedProduct.id}`} className="detail-price">
+                  <motion.p layoutId={`product-price-${selectedProduct.id}-${selectedProduct.instanceId ?? 0}`} className="detail-price">
                     ₹{selectedProduct.price.toFixed(2)}
                   </motion.p>
                   <motion.p 

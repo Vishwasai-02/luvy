@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
@@ -18,30 +18,39 @@ import { WishlistProvider } from './context/WishlistContext';
 
 import MobileBottomNav from './components/MobileBottomNav';
 
+function AppContent() {
+  const location = useLocation();
+  const isAuthPage = location.pathname === '/auth';
+
+  return (
+    <div className="app">
+      <Navbar />
+      <main className="main-content">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/shop" element={<Shop />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/wishlist" element={<Wishlist />} />
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/auth" element={<Auth />} />
+          <Route path="/profile" element={<Profile />} />
+        </Routes>
+      </main>
+      {!isAuthPage && <Footer />}
+      <MobileBottomNav />
+    </div>
+  );
+}
+
 function App() {
   return (
     <Router>
       <CartProvider>
         <WishlistProvider>
           <ScrollToTop />
-          <div className="app">
-            <Navbar />
-            <main className="main-content">
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/shop" element={<Shop />} />
-                <Route path="/contact" element={<Contact />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/cart" element={<Cart />} />
-                <Route path="/wishlist" element={<Wishlist />} />
-                <Route path="/checkout" element={<Checkout />} />
-                <Route path="/auth" element={<Auth />} />
-                <Route path="/profile" element={<Profile />} />
-              </Routes>
-            </main>
-            <Footer />
-            <MobileBottomNav />
-          </div>
+          <AppContent />
           <GlobalNotifications />
         </WishlistProvider>
       </CartProvider>

@@ -3480,20 +3480,28 @@ button {
   }
 
 /* Best Sellers Framer Motion Interactive CSS */
-.best-sellers-carousel {
+.marquee-wrapper {
   display: flex;
-  flex-wrap: nowrap;
+  overflow: hidden;
   gap: 2rem;
-  padding: 1rem;
-  overflow-x: auto;
-  scroll-behavior: smooth;
-  -webkit-overflow-scrolling: touch;
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  padding: 2rem 0;
 }
 
-.best-sellers-carousel::-webkit-scrollbar {
-  display: none;
+.marquee-content {
+  display: flex;
+  gap: 2rem;
+  flex-shrink: 0;
+  width: max-content;
+  animation: scrollMarquee 20s linear infinite;
+}
+
+.marquee-wrapper:hover .marquee-content {
+  animation-play-state: paused;
+}
+
+@keyframes scrollMarquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(calc(-100% - 2rem)); }
 }
 
 .bs-card {
