@@ -565,7 +565,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <div style={{ fontSize: '14px', color: '#1a1a1a', fontWeight: '600', marginBottom: '4px' }}>Visit Us</div>
-                    <div style={{ fontSize: '14px', color: '#777' }}>123, Luxury Avenue, Mumbai</div>
+                    <div style={{ fontSize: '14px', color: '#777' }}>123, Luxury Avenue, Hyderabad, Telangana</div>
                   </div>
                 </div>
               </div>
@@ -582,7 +582,7 @@ const Contact = () => {
               border: '1px solid #eee'
             }}>
               <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d241316.64332468755!2d72.7410986518111!3d19.082522321481238!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c6306644edc1%3A0x5da4ed8f8d648c69!2sMumbai%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d121825.8672535798!2d78.3670678!3d17.4121531!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb99daeaebd2f5%3A0xae93b78392bafbc2!2sHyderabad%2C%20Telangana!5e0!3m2!1sen!2sin!4v1715705354964!5m2!1sen!2sin" 
                 width="100%" 
                 height="100%" 
                 style={{ border: 0, display: 'block' }} 
